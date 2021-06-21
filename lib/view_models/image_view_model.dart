@@ -4,16 +4,19 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
-  File? _selectedImage;
+  late File selectedImage;
 
-  File? get image => _selectedImage;
+  File? get image => selectedImage;
+  void setImage(File image) {
+    selectedImage = image;
+    notifyListeners();
+  }
 
-  void selectImage() async {
+  Future<void> selectImage() async {
     final file = await FilePicker.platform.pickFiles();
     if (file != null) {
-      _selectedImage = File(file.files.first.path!);
-
-      notifyListeners();
+      selectedImage = File(file.files.first.path!);
+      setImage(File(file.files.first.path!));
     }
   }
 }
