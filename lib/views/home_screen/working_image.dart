@@ -29,11 +29,14 @@ class ShowImage extends StatelessWidget {
               width: 432,
               height: 432,
               child: Center(
-                child: Image.file(
-                  imageViewModel.selectedImage,
-                  width: imageViewModel.imageSize,
-                  height: imageViewModel.imageSize,
-                  fit: BoxFit.fitHeight,
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.matrix(imageViewModel.currentFilter),
+                  child: Image.file(
+                    imageViewModel.selectedImage,
+                    width: imageViewModel.imageSize,
+                    height: imageViewModel.imageSize,
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
             ),

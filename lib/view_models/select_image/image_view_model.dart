@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:resizrr/constants/filters.dart';
 import 'package:uuid/uuid.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resizrr/constants/colors.dart';
 
@@ -17,16 +17,24 @@ class SelectImageViewModel extends ChangeNotifier {
   double _imageSize = 300.0;
   final GlobalKey _screenshotKey = GlobalKey();
   File? get image => selectedImage;
+  var _currentFilter = MyFilters.filters[0];
+  double get imageSize => _imageSize;
+  GlobalKey get screenShotKey => _screenshotKey;
+
   void setImage(File image) {
     selectedImage = image;
     notifyListeners();
   }
 
-  double get imageSize => _imageSize;
-  GlobalKey get screenShotKey => _screenshotKey;
-
   void changeImageSize(double size) {
     _imageSize = size;
+    notifyListeners();
+  }
+
+  get currentFilter => _currentFilter;
+
+  void setNewFilter(filterMatrix) {
+    _currentFilter = filterMatrix;
     notifyListeners();
   }
 

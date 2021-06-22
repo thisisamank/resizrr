@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:resizrr/constants/filters.dart';
+import 'package:resizrr/view_models/select_image/image_view_model.dart';
+
+class FilterMenu extends StatelessWidget {
+  const FilterMenu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SelectImageViewModel imageViewModel =
+        Provider.of<SelectImageViewModel>(context);
+    return Expanded(
+      child: ListView.builder(
+        itemCount: MyFilters.filters.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () => imageViewModel.setNewFilter(MyFilters.filters[index]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(60),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: ColorFiltered(
+                        colorFilter:
+                            ColorFilter.matrix(MyFilters.filters[index]),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(60),
+                          child: Image.file(imageViewModel.selectedImage),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
