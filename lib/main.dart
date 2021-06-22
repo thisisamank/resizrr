@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/routes/route_names.dart';
 import 'package:resizrr/routes/router.dart';
-import 'package:resizrr/view_models/image_view_model.dart';
-import 'package:resizrr/views/select_image/select_image.dart';
+import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
 void main() {
   runApp(MyApp());

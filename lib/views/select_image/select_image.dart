@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/routes/route_names.dart';
-import 'package:resizrr/view_models/image_view_model.dart';
+import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
 class SelectImage extends StatelessWidget {
   @override
@@ -24,12 +24,12 @@ class SelectImage extends StatelessWidget {
               },
               child: Container(
                 color: BrandColors.lightGreen,
-                width: ScreenUtil().setWidth(300),
-                height: ScreenUtil().setHeight(327),
+                width: 300.w,
+                height: 327.h,
                 child: Center(
                   child: SvgPicture.asset(
                     'assets/svg/folder.svg',
-                    height: ScreenUtil().setHeight(80),
+                    height: 80.h,
                   ),
                 ),
               ),
