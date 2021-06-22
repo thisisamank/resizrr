@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:uuid/uuid.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -46,8 +47,13 @@ class SelectImageViewModel extends ChangeNotifier {
   void _saveImage(Uint8List byteImage) async {
     await Permission.storage.request();
     if (await Permission.storage.isGranted) {
-      final result = await ImageGallerySaver.saveImage(byteImage,
-          quality: 100, name: 'someImage');
+      final result = await ImageGallerySaver.saveImage(
+        byteImage,
+        quality: 100,
+        name:
+            // ignore: lines_longer_than_80_chars
+            '${image!.path.substring(image!.path.lastIndexOf('/') + 1, image!.path.lastIndexOf('.'))}${Uuid().v1().substring(0, 1)}',
+      );
     }
   }
 

@@ -19,7 +19,7 @@ class BackgroundMenu extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Container(
+          SizedBox(
             height: 60,
             child: Row(
               children: [
@@ -69,10 +69,10 @@ class BackgroundMenu extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text('Change Image Size'),
           ),
-          Slider.adaptive(
+          Slider(
             activeColor: BrandColors.black,
             inactiveColor: BrandColors.lightGrey,
-            min: 200,
+            min: 300,
             max: 500,
             value: imageViewModel.imageSize,
             onChanged: imageViewModel.changeImageSize,
