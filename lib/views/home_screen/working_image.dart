@@ -11,13 +11,32 @@ class ShowImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SelectImageViewModel>(
       builder: (context, imageViewModel, child) {
-        return RepaintBoundary(
-          key: imageViewModel.screenShotKey,
-          child: Container(
-            color: imageViewModel.backgroundColor,
-            width: 414.w,
-            height: 414.w,
-            child: Image.file(imageViewModel.selectedImage),
+        return Container(
+          // decoration: BoxDecoration(
+          //   boxShadow: [
+          //     BoxShadow(
+          //       color: BrandColors.lightGrey,
+          //       offset: Offset(-10, 10),
+          //       blurRadius: 1,
+          //     )
+          //   ],
+          // ),
+          padding: const EdgeInsets.all(24.0),
+          child: RepaintBoundary(
+            key: imageViewModel.screenShotKey,
+            child: Container(
+              color: imageViewModel.backgroundColor,
+              width: 432,
+              height: 432,
+              child: Center(
+                child: Image.file(
+                  imageViewModel.selectedImage,
+                  width: imageViewModel.imageSize,
+                  height: imageViewModel.imageSize,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
           ),
         );
       },

@@ -16,7 +16,9 @@ class BackgroundMenu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 16),
           Container(
             height: 60,
             child: Row(
@@ -61,6 +63,19 @@ class BackgroundMenu extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          SizedBox(height: 72.h),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text('Change Image Size'),
+          ),
+          Slider.adaptive(
+            activeColor: BrandColors.black,
+            inactiveColor: BrandColors.lightGrey,
+            min: 200,
+            max: 500,
+            value: imageViewModel.imageSize,
+            onChanged: imageViewModel.changeImageSize,
           )
         ],
       ),
@@ -76,7 +91,7 @@ class BackgroundMenu extends StatelessWidget {
           contentPadding: const EdgeInsets.all(0.0),
           content: SingleChildScrollView(
             child: ColorPicker(
-              pickerColor: Colors.white,
+              pickerColor: selectImageViewModel.backgroundColor,
               onColorChanged: (color) =>
                   selectImageViewModel.imageBgColor = color,
               colorPickerWidth: 300.0,

@@ -13,6 +13,7 @@ import 'package:resizrr/constants/colors.dart';
 class SelectImageViewModel extends ChangeNotifier {
   late File selectedImage;
   Color _backgrounColor = BrandColors.black;
+  double _imageSize = 300.0;
   final GlobalKey _screenshotKey = GlobalKey();
   File? get image => selectedImage;
   void setImage(File image) {
@@ -20,7 +21,13 @@ class SelectImageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  double get imageSize => _imageSize;
   GlobalKey get screenShotKey => _screenshotKey;
+
+  void changeImageSize(double size) {
+    _imageSize = size;
+    notifyListeners();
+  }
 
   void saveimage() {
     _convertImageToWidget();
@@ -41,7 +48,6 @@ class SelectImageViewModel extends ChangeNotifier {
     if (await Permission.storage.isGranted) {
       final result = await ImageGallerySaver.saveImage(byteImage,
           quality: 100, name: 'someImage');
-      print(result);
     }
   }
 
