@@ -1,10 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:resizrr/constants/colors.dart';
+import 'package:resizrr/models/bg_colors.dart';
+import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
 class BackgroundMenu extends StatelessWidget {
   const BackgroundMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    SelectImageViewModel imageViewModel =
+        Provider.of<SelectImageViewModel>(context);
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Container(
+            height: 60,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 9,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: backgroundColors.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: GestureDetector(
+                          onTap: () => imageViewModel.imageBgColor =
+                              backgroundColors[index],
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: backgroundColors[index],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    border: Border.all(color: BrandColors.black),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      showColorPicker(context, imageViewModel);
+                    },
+                    icon: const Icon(Icons.edit),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  void showColorPicker(context, SelectImageViewModel selectImageViewModel) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: const EdgeInsets.all(0.0),
+          contentPadding: const EdgeInsets.all(0.0),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: Colors.white,
+              onColorChanged: (color) =>
+                  selectImageViewModel.imageBgColor = color,
+              colorPickerWidth: 300.0,
+              pickerAreaHeightPercent: 0.7,
+              enableAlpha: true,
+              displayThumbColor: true,
+              showLabel: true,
+              paletteType: PaletteType.hsv,
+              pickerAreaBorderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(2.0),
+                topRight: Radius.circular(2.0),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

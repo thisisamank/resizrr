@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 import 'package:resizrr/views/home_screen/working_image.dart';
+import 'package:resizrr/views/menu/change_background.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,9 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> _widgetOptions = [
-    Text(
-      'Index 0: Home',
-    ),
+    BackgroundMenu(),
     Text(
       'Index 1: Business',
     ),
