@@ -18,7 +18,8 @@ dependencies:
   google_fonts: ^2.1.0
   image: ^3.0.2
   image_gallery_saver: ^1.6.9
-  permission_handler: ^7.1.0
+  path_provider: ^2.0.2
+  permission_handler: ^8.1.1
   provider: ^5.0.0
   very_good_analysis: ^2.0.3
 

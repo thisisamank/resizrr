@@ -4,3 +4,4 @@ linter:
     public_member_api_docs: false
     use_key_in_widget_constructors: false
     avoid_unnecessary_containers: true
+    omit_local_variable_types: false
