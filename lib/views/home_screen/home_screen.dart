@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 import 'package:resizrr/views/home_screen/working_image.dart';
 import 'package:resizrr/views/menu/change_background.dart';
+import 'package:resizrr/views/menu/edit_image.dart';
 import 'package:resizrr/views/menu/filter_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,20 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> _widgetOptions = [
+    const ImageEditingMenu(),
+    const FilterMenu(),
     const BackgroundMenu(),
-    Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const Text('Select Filter'),
-          const FilterMenu(),
-        ],
-      ),
-    ),
-    Text(
-      'Index 2: School',
-    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,14 +37,25 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: BrandColors.black,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Feather.edit_2,
+              size: 18.sp,
+            ),
             label: 'Edit Image',
           ),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer), label: 'Image Filters'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.maximize_outlined), label: 'Backgrounds'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Feather.sliders,
+                size: 18.sp,
+              ),
+              label: 'Image Filters'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Feather.maximize,
+                size: 18.sp,
+              ),
+              label: 'Backgrounds'),
         ],
       ),
       appBar: AppBar(
@@ -64,14 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () async => imageViewModel.saveimage(),
-              icon: const Icon(Icons.file_download))
+              icon: const Icon(Feather.download))
         ],
         elevation: 0,
       ),
       body: Center(
         child: Column(
           children: [
-            ShowImage(),
+            const ShowImage(),
             _widgetOptions.elementAt(imageMenuIndex),
           ],
         ),

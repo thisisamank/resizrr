@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/models/bg_colors.dart';
@@ -58,7 +59,7 @@ class BackgroundMenu extends StatelessWidget {
                     onPressed: () {
                       showColorPicker(context, imageViewModel);
                     },
-                    icon: const Icon(Icons.edit),
+                    icon: const Icon(Icons.colorize),
                   ),
                 ),
               ],
