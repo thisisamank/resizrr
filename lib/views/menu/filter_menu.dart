@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/constants/filters.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
@@ -24,7 +25,17 @@ class FilterMenu extends StatelessWidget {
                   borderRadius: BorderRadius.circular(60),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
+                    child: Container(
+                      // decoration: BoxDecoration(
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //       color: BrandColors.lightGrey,
+                      //       spreadRadius: 0.3,
+                      //       offset: Offset(0, 16),
+                      //       blurRadius: 13,
+                      //     ),
+                      //   ],
+                      // ),
                       width: 100,
                       height: 100,
                       child: ColorFiltered(

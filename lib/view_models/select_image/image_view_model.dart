@@ -15,11 +15,34 @@ class SelectImageViewModel extends ChangeNotifier {
   late File selectedImage;
   Color _backgrounColor = BrandColors.black;
   double _imageSize = 300.0;
+  double _brightness = 0.0;
+  double _saturation = 0.0;
+  double _hue = 0.0;
   final GlobalKey _screenshotKey = GlobalKey();
-  File? get image => selectedImage;
   var _currentFilter = MyFilters.filters[0];
+
+  File? get image => selectedImage;
+  Color get backgroundColor => _backgrounColor;
   double get imageSize => _imageSize;
   GlobalKey get screenShotKey => _screenshotKey;
+  double get imageBrightness => _brightness;
+  double get imageSaturation => _saturation;
+  double get imageHue => _hue;
+
+  void setBrightness(double value) {
+    _brightness = value;
+    notifyListeners();
+  }
+
+  void setSaturation(double value) {
+    _saturation = value;
+    notifyListeners();
+  }
+
+  void setHue(double value) {
+    _hue = value;
+    notifyListeners();
+  }
 
   void setImage(File image) {
     selectedImage = image;
@@ -64,8 +87,6 @@ class SelectImageViewModel extends ChangeNotifier {
       );
     }
   }
-
-  Color get backgroundColor => _backgrounColor;
 
   set imageBgColor(Color color) {
     _backgrounColor = color;

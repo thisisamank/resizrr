@@ -20,8 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> _widgetOptions = [
-    BackgroundMenu(),
-    FilterMenu(),
+    const BackgroundMenu(),
+    Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Text('Select Filter'),
+          const FilterMenu(),
+        ],
+      ),
+    ),
     Text(
       'Index 2: School',
     ),
@@ -35,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _changeMenu,
         currentIndex: imageMenuIndex,
         selectedItemColor: BrandColors.black,
+        // ignore: prefer_const_literals_to_create_immutables
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.add),
