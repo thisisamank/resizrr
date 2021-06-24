@@ -19,13 +19,12 @@ class BackgroundMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          SizedBox(height: 8.h),
           SizedBox(
-            height: 60,
+            height: 50,
             child: Row(
               children: [
                 Expanded(
-                  flex: 9,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: backgroundColors.length,
@@ -36,8 +35,8 @@ class BackgroundMenu extends StatelessWidget {
                           onTap: () => imageViewModel.imageBgColor =
                               backgroundColors[index],
                           child: Container(
-                            width: 60,
-                            height: 60,
+                            width: 50,
+                            height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               color: backgroundColors[index],
@@ -49,8 +48,8 @@ class BackgroundMenu extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
                     border: Border.all(color: BrandColors.black),
@@ -65,7 +64,7 @@ class BackgroundMenu extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 72.h),
+          SizedBox(height: 12),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text('Change Image Size'),

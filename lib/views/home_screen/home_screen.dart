@@ -21,6 +21,24 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => imageMenuIndex = index);
   }
 
+  Widget _buildCircularIcon({
+    required IconData icon,
+  }) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(60),
+        border: Border.all(color: BrandColors.green),
+      ),
+      child: Icon(
+        icon,
+        color: BrandColors.green,
+        size: 20,
+      ),
+    );
+  }
+
   final List<Widget> _widgetOptions = [
     const ImageEditingMenu(),
     const FilterMenu(),
@@ -29,6 +47,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final imageViewModel = Provider.of<SelectImageViewModel>(context);
+    final snackBar = SnackBar(
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      behavior: SnackBarBehavior.floating,
+      // backgroundColor: AppTheme.toastBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30)),
+      ),
+      content: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          Icon(
+            AntDesign.checkcircle,
+            size: 30,
+            color: BrandColors.green,
+          ),
+          const SizedBox(width: 20),
+          const Expanded(
+            child: Text(
+              'Image saved 😎',
+            ),
+          ),
+        ],
+      ),
+    );
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -65,7 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () async => imageViewModel.saveimage(),
+              onPressed: () async {
+                imageViewModel.saveimage();
+
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
               icon: const Icon(Feather.download))
         ],
         elevation: 0,

@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
@@ -11,6 +15,7 @@ class ImageEditingMenu extends StatefulWidget {
   _ImageEditingMenuState createState() => _ImageEditingMenuState();
 }
 
+// TODO: Migrate this file to Widget-View way
 class _ImageEditingMenuState extends State<ImageEditingMenu> {
   bool showHueSlider = false;
   bool showBrightnessSlider = false;
@@ -58,19 +63,38 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
         sliderValue: imageViewModel.imageSaturation,
       );
     } else {
-      return ListView(
-        scrollDirection: Axis.horizontal,
+      return Column(
         children: [
-          _buildCircularIcon(
-              icon: Icons.tonality,
-              onTap: changeBrightnessSlider,
-              label: 'Brightness'),
-          _buildCircularIcon(
-              icon: Icons.colorize, onTap: changeHueSlider, label: 'Hue'),
-          _buildCircularIcon(
-              icon: FontAwesome.lightbulb_o,
-              onTap: changeSaturationSlider,
-              label: 'Saturation'),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  _buildCircularIcon(
+                    icon: Icons.tonality,
+                    onTap: changeBrightnessSlider,
+                    label: 'Brightness',
+                  ),
+                  _buildCircularIcon(
+                    icon: Icons.colorize,
+                    onTap: changeHueSlider,
+                    label: 'Hue',
+                  ),
+                  _buildCircularIcon(
+                    icon: FontAwesome.lightbulb_o,
+                    onTap: changeSaturationSlider,
+                    label: 'Saturation',
+                  ),
+                  _buildCircularIcon(
+                    icon: FontAwesome.crop,
+                    onTap: () => cropImage(imageViewModel),
+                    label: 'Transform',
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       );
     }
@@ -82,7 +106,7 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
     required String label,
   }) {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Container(
@@ -126,12 +150,38 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             color: BrandColors.black,
             child: const Text(
-              "Done",
+              'Done',
               style: TextStyle(color: Colors.white),
             ),
           )
         ],
       ),
     );
+  }
+}
+
+void cropImage(SelectImageViewModel imageViewModel) async {
+  File? croppedFile = await ImageCropper.cropImage(
+    sourcePath: imageViewModel.image!.path,
+    aspectRatioPresets: [
+      CropAspectRatioPreset.square,
+      CropAspectRatioPreset.ratio3x2,
+      CropAspectRatioPreset.original,
+      CropAspectRatioPreset.ratio4x3,
+      CropAspectRatioPreset.ratio16x9
+    ],
+    androidUiSettings: const AndroidUiSettings(
+      toolbarTitle: 'Crop your image',
+      toolbarColor: Colors.black,
+      toolbarWidgetColor: Colors.white,
+      initAspectRatio: CropAspectRatioPreset.original,
+      lockAspectRatio: false,
+    ),
+    iosUiSettings: const IOSUiSettings(
+      minimumAspectRatio: 1.0,
+    ),
+  );
+  if (croppedFile != null) {
+    imageViewModel.setCroppedImage(croppedFile);
   }
 }

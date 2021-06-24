@@ -38,7 +38,7 @@ class FilterMenu extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(60),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Container(
                             // decoration: BoxDecoration(
                             //   boxShadow: [
@@ -50,14 +50,17 @@ class FilterMenu extends StatelessWidget {
                             //     ),
                             //   ],
                             // ),
-                            width: 100,
-                            height: 100,
+                            width: 70,
+                            height: 70,
                             child: ColorFiltered(
                               colorFilter:
                                   ColorFilter.matrix(MyFilters.filters[index]),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(60),
-                                child: Image.file(imageViewModel.selectedImage),
+                                child: Image.file(
+                                  imageViewModel.selectedImage,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
                           ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
 import 'package:resizrr/constants/filters.dart';
 import 'package:uuid/uuid.dart';
 import 'package:file_picker/file_picker.dart';
@@ -13,16 +14,18 @@ import 'package:resizrr/constants/colors.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
   late File selectedImage;
-  Color _backgrounColor = BrandColors.black;
+  Color _backgroundColor = Colors.white;
   double _imageSize = 300.0;
   double _brightness = 0.0;
   double _saturation = 0.0;
   double _hue = 0.0;
   final GlobalKey _screenshotKey = GlobalKey();
   var _currentFilter = MyFilters.filters[0];
+  File? _croppedImage;
 
   File? get image => selectedImage;
-  Color get backgroundColor => _backgrounColor;
+  Color get backgroundColor => _backgroundColor;
+  File? get croppedImage => _croppedImage;
   double get imageSize => _imageSize;
   GlobalKey get screenShotKey => _screenshotKey;
   double get imageBrightness => _brightness;
@@ -31,6 +34,16 @@ class SelectImageViewModel extends ChangeNotifier {
 
   void setBrightness(double value) {
     _brightness = value;
+    notifyListeners();
+  }
+
+  void reset() {
+    _imageSize = 300;
+    _brightness = 0;
+    _saturation = 0;
+    _hue = 0;
+    _currentFilter = MyFilters.filters[0];
+    _croppedImage = null;
     notifyListeners();
   }
 
@@ -44,8 +57,8 @@ class SelectImageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setImage(File image) {
-    selectedImage = image;
+  void setCroppedImage(File? image) {
+    _croppedImage = image;
     notifyListeners();
   }
 
@@ -68,7 +81,7 @@ class SelectImageViewModel extends ChangeNotifier {
   void _convertImageToWidget() async {
     RenderRepaintBoundary boundaryImage = _screenshotKey.currentContext!
         .findRenderObject() as RenderRepaintBoundary;
-    ui.Image boxImage = await boundaryImage.toImage(pixelRatio: 2);
+    ui.Image boxImage = await boundaryImage.toImage(pixelRatio: 3);
     ByteData? byteData =
         await boxImage.toByteData(format: ui.ImageByteFormat.png);
     Uint8List byteImage = byteData!.buffer.asUint8List();
@@ -89,15 +102,29 @@ class SelectImageViewModel extends ChangeNotifier {
   }
 
   set imageBgColor(Color color) {
-    _backgrounColor = color;
+    _backgroundColor = color;
     notifyListeners();
   }
 
   Future<void> selectImage() async {
-    final file = await FilePicker.platform.pickFiles();
+    final file = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      allowCompression: false,
+      type: FileType.image,
+      // onFileLoading: (FilePickerStatus status) {
+      //   if (status == FilePickerStatus.picking) {
+      //     return Center(
+      //       child: CircularProgressIndicator(
+      //         color: BrandColors.black,
+      //       ),
+      //     );
+      //   }
+      // },
+    );
     if (file != null) {
+      reset();
       selectedImage = File(file.files.first.path!);
-      setImage(File(file.files.first.path!));
+      // setCroppedImage(File(file.files.first.path!));
     }
   }
 }

@@ -15,13 +15,13 @@ class ShowImage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(16.0),
               child: RepaintBoundary(
                 key: imageViewModel.screenShotKey,
                 child: Container(
                   color: imageViewModel.backgroundColor,
-                  width: 432,
-                  height: 432,
+                  width: 360,
+                  height: 360,
                   child: Center(
                     child: ImageFilter(
                       hue: imageViewModel.imageHue,
@@ -31,10 +31,11 @@ class ShowImage extends StatelessWidget {
                         colorFilter:
                             ColorFilter.matrix(imageViewModel.currentFilter),
                         child: Image.file(
-                          imageViewModel.selectedImage,
+                          imageViewModel.croppedImage ??
+                              imageViewModel.selectedImage,
                           width: imageViewModel.imageSize,
                           height: imageViewModel.imageSize,
-                          fit: BoxFit.fitHeight,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
