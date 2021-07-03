@@ -1,6 +1,18 @@
-# resizrr
+# Resizrr
 
-A new Flutter project.
+Mobile app to crop images.
+
+<img src="C:\Users\Aman Kumar\Desktop\projects\resizrr\public\Frame 16.png" alt="Frame 16" style="zoom:40%;" />
+
+
+
+## Screens
+
+| <img src=".\public\OnboardingScreen.png" alt="OnboardingScreen" style="zoom:50%;" /> | <img src=".\public\FifthScreen.png" alt="FifthScreen" style="zoom:50%;" /> | <img src=".\public\ThirdScreen.png" alt="ThirdScreen" style="zoom:50%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src=".\public\FourthScreen.png" alt="FourthScreen" style="zoom:50%;" /> | <img src=".\public\SixthScreen.png" alt="SixthScreen" style="zoom:50%;" /> |                                                              |
+
+
 
 ## Getting Started
 
@@ -14,3 +26,4 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
