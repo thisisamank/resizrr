@@ -2,7 +2,7 @@
 
 Mobile app to crop images.
 
-<img src="C:\Users\Aman Kumar\Desktop\projects\resizrr\public\Frame 16.png" alt="Frame 16" style="zoom:40%;" />
+<img src=".\public\Frame 16.png" alt="Frame 16" style="zoom:40%;" />
 
 
 
