@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -93,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () async {
+                await HapticFeedback.mediumImpact();
                 imageViewModel.saveimage();
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
