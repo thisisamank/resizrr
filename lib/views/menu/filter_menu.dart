@@ -20,7 +20,7 @@ class FilterMenu extends StatelessWidget {
           Expanded(
             flex: 2,
             child: ListView.builder(
-              itemCount: MyFilters.filters.length + 1,
+              itemCount: MyFilters.filters.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return GestureDetector(

@@ -37,7 +37,7 @@ class BackgroundMenu extends StatelessWidget {
                             index == 0
                                 ? imageViewModel.changeBackgroundBlur()
                                 : imageViewModel.imageBgColor =
-                                    backgroundColors[index];
+                                    backgroundColors[index - 1];
                           },
                           child: index == 0
                               ? SizedBox(
@@ -60,7 +60,7 @@ class BackgroundMenu extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
-                                    color: backgroundColors[index],
+                                    color: backgroundColors[index - 1],
                                   ),
                                 ),
                         ),
