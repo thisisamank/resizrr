@@ -20,8 +20,12 @@ class ShowImage extends StatelessWidget {
                 key: imageViewModel.screenShotKey,
                 child: Container(
                   color: imageViewModel.backgroundColor,
-                  width: 360,
-                  height: 360,
+                  constraints: const BoxConstraints(
+                    minHeight: 360,
+                    maxHeight: 360,
+                    maxWidth: 360,
+                    minWidth: 360,
+                  ),
                   child: Center(
                     child: ImageFilter(
                       hue: imageViewModel.imageHue,

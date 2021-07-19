@@ -67,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(
               Feather.edit_2,
-              
               size: 18.sp,
             ),
             label: 'Edit Image',
