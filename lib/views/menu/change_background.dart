@@ -1,7 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/models/bg_colors.dart';
@@ -27,21 +28,41 @@ class BackgroundMenu extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: backgroundColors.length,
+                    itemCount: backgroundColors.length + 1,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GestureDetector(
-                          onTap: () => imageViewModel.imageBgColor =
-                              backgroundColors[index],
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: backgroundColors[index],
-                            ),
-                          ),
+                          onTap: () {
+                            index == 0
+                                ? imageViewModel.changeBackgroundBlur()
+                                : imageViewModel.imageBgColor =
+                                    backgroundColors[index];
+                          },
+                          child: index == 0
+                              ? SizedBox(
+                                  width: 70,
+                                  height: 70,
+                                  child: ImageFiltered(
+                                    imageFilter:
+                                        ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(60),
+                                      child: Image.file(
+                                        imageViewModel.selectedImage,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: backgroundColors[index],
+                                  ),
+                                ),
                         ),
                       );
                     },

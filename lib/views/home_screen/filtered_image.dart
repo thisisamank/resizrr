@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resizrr/utils/color_filter.dart';
 
-Widget ImageFilter(
+Widget AppImageFilter(
     {double brightness = 0, double saturation = 0, double hue = 0, child}) {
   return ColorFiltered(
     colorFilter: ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(

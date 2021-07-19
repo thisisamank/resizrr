@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
@@ -18,6 +20,8 @@ class ShowImage extends StatelessWidget {
               child: RepaintBoundary(
                 key: imageViewModel.screenShotKey,
                 child: Container(
+                  height: 360.0,
+                  width: 360.0,
                   color: imageViewModel.backgroundColor,
                   constraints: const BoxConstraints(
                     minHeight: 360,
@@ -25,23 +29,47 @@ class ShowImage extends StatelessWidget {
                     maxWidth: 360,
                     minWidth: 360,
                   ),
-                  child: Center(
-                    child: ImageFilter(
-                      hue: imageViewModel.imageHue,
-                      brightness: imageViewModel.imageBrightness,
-                      saturation: imageViewModel.imageSaturation,
-                      child: ColorFiltered(
-                        colorFilter:
-                            ColorFilter.matrix(imageViewModel.currentFilter),
-                        child: Image.file(
-                          imageViewModel.croppedImage ??
-                              imageViewModel.selectedImage,
-                          width: imageViewModel.imageSize,
-                          height: imageViewModel.imageSize,
-                          fit: BoxFit.contain,
+                  child: Stack(
+                    children: [
+                      imageViewModel.backgroundBlurStatus
+                          ? Image.file(
+                              imageViewModel.croppedImage ??
+                                  imageViewModel.selectedImage,
+                              width: 360,
+                              height: 360,
+                              fit: BoxFit.cover,
+                            )
+                          : Container(),
+                      imageViewModel.backgroundBlurStatus
+                          ? BackdropFilter(
+                              filter: ImageFilter.blur(
+                                  sigmaX: 3,
+                                  sigmaY: 3,
+                                  tileMode: TileMode.decal),
+                              child: Container(
+                                color: Colors.grey.withOpacity(0.1),
+                              ),
+                            )
+                          : Container(),
+                      Center(
+                        child: AppImageFilter(
+                          hue: imageViewModel.imageHue,
+                          brightness: imageViewModel.imageBrightness,
+                          saturation: imageViewModel.imageSaturation,
+                          child: ColorFiltered(
+                            colorFilter: ColorFilter.matrix(
+                                imageViewModel.currentFilter),
+                            child: Image.file(
+                              imageViewModel.croppedImage ??
+                                  imageViewModel.selectedImage,
+                              width: imageViewModel.imageSize,
+                              height: imageViewModel.imageSize,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

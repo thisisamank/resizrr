@@ -22,6 +22,7 @@ class SelectImageViewModel extends ChangeNotifier {
   final GlobalKey _screenshotKey = GlobalKey();
   var _currentFilter = MyFilters.filters[0];
   File? _croppedImage;
+  bool _isBackgroundBlurEnabled = false;
 
   File? get image => selectedImage;
   Color get backgroundColor => _backgroundColor;
@@ -31,9 +32,15 @@ class SelectImageViewModel extends ChangeNotifier {
   double get imageBrightness => _brightness;
   double get imageSaturation => _saturation;
   double get imageHue => _hue;
+  bool get backgroundBlurStatus => _isBackgroundBlurEnabled;
 
   void setBrightness(double value) {
     _brightness = value;
+    notifyListeners();
+  }
+
+  void changeBackgroundBlur() {
+    _isBackgroundBlurEnabled = !_isBackgroundBlurEnabled;
     notifyListeners();
   }
 
