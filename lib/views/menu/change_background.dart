@@ -5,7 +5,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
-import 'package:resizrr/models/bg_colors.dart';
+import 'package:resizrr/constants/bg_colors.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
 class BackgroundMenu extends StatelessWidget {
@@ -85,7 +85,7 @@ class BackgroundMenu extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text('Change Image Size'),

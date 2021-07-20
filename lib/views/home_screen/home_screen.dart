@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          Icon(
+          const Icon(
             AntDesign.checkcircle,
             size: 30,
             color: BrandColors.green,
