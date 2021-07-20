@@ -16,7 +16,7 @@ class SelectImage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           Center(
             child: GestureDetector(
               onTap: () async {
