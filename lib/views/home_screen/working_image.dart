@@ -53,7 +53,7 @@ class ShowImage extends StatelessWidget {
                               )
                             : Container(),
                         Center(
-                          child: AppImageFilter(
+                          child: appImageFilter(
                             hue: imageViewModel.imageHue,
                             brightness: imageViewModel.imageBrightness,
                             saturation: imageViewModel.imageSaturation,

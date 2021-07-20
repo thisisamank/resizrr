@@ -10,7 +10,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:resizrr/constants/colors.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
   late File selectedImage;
@@ -74,7 +73,7 @@ class SelectImageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  get currentFilter => _currentFilter;
+  dynamic get currentFilter => _currentFilter;
 
   void setNewFilter(filterMatrix) {
     _currentFilter = filterMatrix;
@@ -98,12 +97,12 @@ class SelectImageViewModel extends ChangeNotifier {
   void _saveImage(Uint8List byteImage) async {
     await Permission.storage.request();
     if (await Permission.storage.isGranted) {
-      final result = await ImageGallerySaver.saveImage(
+      await ImageGallerySaver.saveImage(
         byteImage,
         quality: 100,
         name:
             // ignore: lines_longer_than_80_chars
-            '${image!.path.substring(image!.path.lastIndexOf('/') + 1, image!.path.lastIndexOf('.'))}${Uuid().v1().substring(0, 1)}',
+            '${image!.path.substring(image!.path.lastIndexOf('/') + 1, image!.path.lastIndexOf('.'))}${const Uuid().v1().substring(0, 1)}',
       );
     }
   }
