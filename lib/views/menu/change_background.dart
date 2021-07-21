@@ -34,23 +34,28 @@ class BackgroundMenu extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GestureDetector(
                           onTap: () {
-                            index == 0
-                                ? imageViewModel.changeBackgroundBlur()
-                                : imageViewModel.imageBgColor =
-                                    backgroundColors[index - 1];
+                            if (index == 0) {
+                              imageViewModel.changeBackgroundBlur();
+                            } else {
+                              if (imageViewModel.backgroundBlurStatus) {
+                                imageViewModel.changeBackgroundBlur();
+                              }
+                              imageViewModel.imageBgColor =
+                                  backgroundColors[index - 1];
+                            }
                           },
                           child: index == 0
-                              ? SizedBox(
-                                  width: 70,
-                                  height: 70,
-                                  child: ImageFiltered(
-                                    imageFilter:
-                                        ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(60),
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(70),
+                                  child: SizedBox(
+                                    width: 70,
+                                    height: 70,
+                                    child: ImageFiltered(
+                                      imageFilter: ImageFilter.blur(
+                                          sigmaX: 3, sigmaY: 3),
                                       child: Image.file(
                                         imageViewModel.selectedImage,
-                                        fit: BoxFit.fitWidth,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
