@@ -37,8 +37,8 @@ class ShowImage extends StatelessWidget {
                             ? Image.file(
                                 imageViewModel.croppedImage ??
                                     imageViewModel.selectedImage,
-                                width: 360,
-                                height: 360,
+                                width: size.width,
+                                height: size.width,
                                 fit: BoxFit.cover,
                               )
                             : Container(),
