@@ -10,6 +10,7 @@ class ShowImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Consumer<SelectImageViewModel>(
       builder: (context, imageViewModel, child) {
         return Column(
@@ -21,14 +22,14 @@ class ShowImage extends StatelessWidget {
                 key: imageViewModel.screenShotKey,
                 child: Center(
                   child: Container(
-                    height: 360.0,
-                    width: 360.0,
+                    height: size.width,
+                    width: size.width,
                     color: imageViewModel.backgroundColor,
-                    constraints: const BoxConstraints(
-                      minHeight: 360,
-                      maxHeight: 360,
-                      maxWidth: 360,
-                      minWidth: 360,
+                    constraints: BoxConstraints(
+                      minHeight: size.width,
+                      maxHeight: size.width,
+                      maxWidth: size.width,
+                      minWidth: size.width,
                     ),
                     child: Stack(
                       children: [
