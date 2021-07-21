@@ -36,8 +36,9 @@ class FilterMenu extends StatelessWidget {
                             width: 70,
                             height: 70,
                             child: ColorFiltered(
-                              colorFilter:
-                                  ColorFilter.matrix(MyFilters.filters[index]),
+                              colorFilter: ColorFilter.matrix(
+                                MyFilters.filters[index],
+                              ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(60),
                                 child: Image.file(
