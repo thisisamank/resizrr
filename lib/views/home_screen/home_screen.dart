@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () async {
-                await HapticFeedback.mediumImpact();
+                await HapticFeedback.vibrate();
                 imageViewModel.saveimage();
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },

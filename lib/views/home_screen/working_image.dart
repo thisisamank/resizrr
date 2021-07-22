@@ -20,17 +20,10 @@ class ShowImage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: RepaintBoundary(
                 key: imageViewModel.screenShotKey,
-                child: Center(
+                child: AspectRatio(
+                  aspectRatio: 1.0,
                   child: Container(
-                    height: size.width,
-                    width: size.width,
                     color: imageViewModel.backgroundColor,
-                    constraints: BoxConstraints(
-                      minHeight: size.width,
-                      maxHeight: size.width,
-                      maxWidth: size.width,
-                      minWidth: size.width,
-                    ),
                     child: Stack(
                       children: [
                         imageViewModel.backgroundBlurStatus
