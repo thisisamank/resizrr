@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/routes/route_names.dart';
+import 'package:resizrr/utils/theme_switch.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,11 +13,17 @@ class SelectImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectImageViewModel = Provider.of<SelectImageViewModel>(context);
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(height: 24),
+          IconButton(
+              icon: Icon(themeNotifier.isDark
+                  ? Icons.nightlight_round
+                  : Icons.wb_sunny),
+              onPressed: themeNotifier.toggleTheme),
           Center(
             child: GestureDetector(
               onTap: () async {

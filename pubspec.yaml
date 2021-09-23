@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dotted_border: ^2.0.0
   file_picker: ^3.0.1
-  flutter_colorpicker: ^0.4.0
+  flutter_colorpicker: ^0.5.0
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
   flutter_vector_icons: ^1.0.0
