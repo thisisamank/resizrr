@@ -5,6 +5,8 @@ import 'package:resizrr/routes/route_names.dart';
 import 'package:resizrr/routes/router.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
+import 'constants/theme.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
       create: (context) => SelectImageViewModel(),
       child: ScreenUtilInit(
         designSize: const Size(414, 736),
-        builder: () => const MaterialApp(
+        builder: () => MaterialApp(
+          theme: BrandTheme.darkTheme,
           onGenerateRoute: Routes.onGenerateRoute,
           onUnknownRoute: Routes.onUnknownRoute,
           initialRoute: RouteNames.selectImage,

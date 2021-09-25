@@ -72,13 +72,17 @@ class ShowImage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: GestureDetector(
-                onTap: () => imageViewModel.selectImage(),
+              child: TextButton(
+                //onTap: () => imageViewModel.selectImage(),
+                onPressed: () => imageViewModel.selectImage(),
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.centerLeft),
                 child: const Text(
                   'Choose next Image',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
-                    decorationColor: Colors.black,
+                    //decorationColor: Colors.black,
                   ),
                 ),
               ),
