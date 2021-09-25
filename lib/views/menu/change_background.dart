@@ -78,7 +78,7 @@ class BackgroundMenu extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    border: Border.all(color: BrandColors.black),
+                    border: Border.all(color: BrandColors.adaptiveBorder(context)),
                   ),
                   child: IconButton(
                     onPressed: () {
@@ -96,8 +96,8 @@ class BackgroundMenu extends StatelessWidget {
             child: Text('Change Image Size'),
           ),
           Slider(
-            activeColor: BrandColors.black,
-            inactiveColor: BrandColors.lightGrey,
+            // activeColor: BrandColors.black,
+            // inactiveColor: BrandColors.lightGrey,
             min: 300,
             max: 500,
             value: imageViewModel.imageSize,
