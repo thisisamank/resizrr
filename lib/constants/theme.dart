@@ -44,6 +44,12 @@ class BrandTheme {
       inactiveTrackColor: BrandColors.lightGreen,
       thumbColor: BrandColors.green,
     ),
+    textTheme: TextTheme(
+      headline1: GoogleFonts.inter(fontSize: 20),
+      bodyText1: GoogleFonts.inter(fontSize: 18),
+      bodyText2: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold),
+      subtitle1: GoogleFonts.inter(fontSize: 14),
+    ),
     brightness: Brightness.dark,
     backgroundColor: BrandColors.black,
     accentColor: BrandColors.green,
