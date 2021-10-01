@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _changeMenu,
         currentIndex: imageMenuIndex,
-       // selectedItemColor: BrandColors.black,
+        // selectedItemColor: BrandColors.black,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(

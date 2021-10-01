@@ -114,7 +114,11 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
             height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(60),
-              border: Border.all(color: BrandColors.adaptiveBorder(context)),
+              border: Border.all(
+                  color: MediaQuery.of(context).platformBrightness ==
+                          Brightness.dark
+                      ? BrandColors.lightGrey
+                      : BrandColors.lightGreen),
             ),
             child: IconButton(
               onPressed: onTap,

@@ -78,7 +78,8 @@ class BackgroundMenu extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    border: Border.all(color: BrandColors.adaptiveBorder(context)),
+                    border:
+                        Border.all(color: BrandColors.adaptiveBorder(context)),
                   ),
                   child: IconButton(
                     onPressed: () {

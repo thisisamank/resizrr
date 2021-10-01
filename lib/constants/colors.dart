@@ -8,6 +8,8 @@ class BrandColors {
   static const lightGrey = Color(0xFFE8E8E8);
   static const black = Color(0xFF0C0C0D);
 
-  static Color adaptiveBorder(BuildContext context)
-  => MediaQuery.of(context).platformBrightness == Brightness.dark ? BrandColors.lightGrey : Colors.black;
+  static Color adaptiveBorder(BuildContext context) =>
+      MediaQuery.of(context).platformBrightness == Brightness.dark
+          ? BrandColors.lightGrey
+          : Colors.black;
 }

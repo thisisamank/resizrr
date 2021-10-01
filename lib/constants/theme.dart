@@ -8,8 +8,10 @@ class BrandTheme {
     appBarTheme: const AppBarTheme(
       brightness: Brightness.light,
       backgroundColor: Colors.white,
-      iconTheme: IconThemeData(color: BrandColors.black,),
-     // actionsIconTheme: IconThemeData(color: BrandColors.green,),
+      iconTheme: IconThemeData(
+        color: BrandColors.black,
+      ),
+      // actionsIconTheme: IconThemeData(color: BrandColors.green,),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: BrandColors.black,
@@ -29,15 +31,19 @@ class BrandTheme {
 
   static final darkTheme = ThemeData(
     primarySwatch: Colors.green,
+    scaffoldBackgroundColor: BrandColors.black,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: BrandColors.green,
     ),
     appBarTheme: const AppBarTheme(
       brightness: Brightness.dark,
-      //backgroundColor: BrandColors.black,
-
-      iconTheme: IconThemeData(color: BrandColors.green,),
-      actionsIconTheme: IconThemeData(color: BrandColors.green,),
+      backgroundColor: BrandColors.black,
+      iconTheme: IconThemeData(
+        color: BrandColors.green,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: BrandColors.green,
+      ),
     ),
     sliderTheme: const SliderThemeData(
       activeTrackColor: BrandColors.green,
@@ -53,7 +59,11 @@ class BrandTheme {
     brightness: Brightness.dark,
     backgroundColor: BrandColors.black,
     accentColor: BrandColors.green,
-    accentIconTheme: const IconThemeData(color: BrandColors.green,),
-    iconTheme: const IconThemeData(color: BrandColors.green,),
+    accentIconTheme: const IconThemeData(
+      color: BrandColors.green,
+    ),
+    iconTheme: const IconThemeData(
+      color: BrandColors.green,
+    ),
   );
 }
