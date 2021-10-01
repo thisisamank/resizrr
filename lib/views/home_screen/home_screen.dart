@@ -102,16 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const ShowImage(),
-            Container(),
-            _widgetOptions.elementAt(imageMenuIndex),
-            Container(),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const ShowImage(),
+          _widgetOptions.elementAt(imageMenuIndex),
+        ],
       ),
     );
   }

@@ -16,7 +16,7 @@ class BackgroundMenu extends StatelessWidget {
     SelectImageViewModel imageViewModel =
         Provider.of<SelectImageViewModel>(context);
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
