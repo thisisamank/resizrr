@@ -10,8 +10,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share/share.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
+  final GlobalKey genKey = GlobalKey();
   late File selectedImage;
   Color _backgroundColor = Colors.white;
   double _imageSize = 300.0;
@@ -82,6 +85,22 @@ class SelectImageViewModel extends ChangeNotifier {
 
   void saveimage() {
     _convertImageToWidget();
+  }
+
+  void shareimage() {
+    takePicture();
+  }
+
+  Future<void> takePicture() async {
+    RenderRepaintBoundary boundary = _screenshotKey.currentContext!
+        .findRenderObject() as RenderRepaintBoundary;
+    ui.Image image = await boundary.toImage();
+    final directory = (await getApplicationDocumentsDirectory()).path;
+    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List pngBytes = byteData!.buffer.asUint8List();
+    File imgFile = File('$directory/photo.png');
+    await imgFile.writeAsBytes(pngBytes);
+    await Share.shareFiles([imgFile.path]);
   }
 
   void _convertImageToWidget() async {

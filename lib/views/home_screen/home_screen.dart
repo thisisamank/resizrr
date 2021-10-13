@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _changeMenu,
         currentIndex: imageMenuIndex,
-       // selectedItemColor: BrandColors.black,
+        // selectedItemColor: BrandColors.black,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(
@@ -95,10 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () async {
                 await HapticFeedback.vibrate();
+                imageViewModel.shareimage();
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              icon: const Icon(Icons.share)),
+          IconButton(
+              onPressed: () async {
+                await HapticFeedback.vibrate();
                 imageViewModel.saveimage();
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
-              icon: const Icon(Feather.download))
+              icon: const Icon(Feather.download)),
         ],
         elevation: 0,
       ),
