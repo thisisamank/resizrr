@@ -27,10 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
     const FilterMenu(),
     const BackgroundMenu(),
   ];
-  @override
-  Widget build(BuildContext context) {
-    final imageViewModel = Provider.of<SelectImageViewModel>(context);
-    final snackBar = SnackBar(
+
+  SnackBar getSnackbar(String message) {
+    return SnackBar(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       behavior: SnackBarBehavior.floating,
@@ -49,15 +48,17 @@ class _HomeScreenState extends State<HomeScreen> {
             color: BrandColors.green,
           ),
           const SizedBox(width: 20),
-          const Expanded(
-            child: Text(
-              'Image saved 😎',
-            ),
+          Expanded(
+            child: Text(message),
           ),
         ],
       ),
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    final imageViewModel = Provider.of<SelectImageViewModel>(context);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         onTap: _changeMenu,
@@ -96,14 +97,16 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 await HapticFeedback.vibrate();
                 imageViewModel.shareimage();
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(getSnackbar('Sharing image...'));
               },
               icon: const Icon(Icons.share)),
           IconButton(
               onPressed: () async {
                 await HapticFeedback.vibrate();
                 imageViewModel.saveimage();
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(getSnackbar('Image saved 😎'));
               },
               icon: const Icon(Feather.download)),
         ],
