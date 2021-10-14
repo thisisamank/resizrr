@@ -87,17 +87,19 @@ class SelectImageViewModel extends ChangeNotifier {
     _saveImage(image);
   }
 
-  void shareimage() {
-    takePicture();
+  void shareimage() async {
+    final imgFile = await _takePicture();
+    await Share.shareFiles([imgFile.path]);
+    await imgFile.delete();
   }
 
-  Future<void> takePicture() async {
+  Future<File> _takePicture() async {
     var byteimage = await _convertImageToBytes();
 
     final directory = (await getApplicationDocumentsDirectory()).path;
     File imgFile = File('$directory/photo.png');
     await imgFile.writeAsBytes(byteimage);
-    await Share.shareFiles([imgFile.path]);
+    return imgFile;
   }
 
   Future<Uint8List> _convertImageToBytes() async {
