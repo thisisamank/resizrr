@@ -24,9 +24,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     AppPreference.instance.getTheme(Themes.KEY).then((prefTheme) {
-      print(prefTheme);
-      isDarkTheme.value =  prefTheme == Themes.system ?
-      WidgetsBinding.instance?.window.platformBrightness == Brightness.dark : prefTheme == Themes.dark;
+      isDarkTheme.value = prefTheme == Themes.system
+          ? WidgetsBinding.instance?.window.platformBrightness ==
+              Brightness.dark
+          : prefTheme == Themes.dark;
     });
 
     WidgetsBinding.instance?.addObserver(this);
@@ -40,7 +41,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
       create: (context) => SelectImageViewModel(),
       child: ScreenUtilInit(
@@ -66,7 +66,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     final isDark =
         WidgetsBinding.instance?.window.platformBrightness == Brightness.dark;
     isDarkTheme.value = isDark;
-    AppPreference.instance.setTheme(Themes.KEY, isDark ? Themes.dark : Themes.light);
+    AppPreference.instance
+        .setTheme(Themes.KEY, isDark ? Themes.dark : Themes.light);
     super.didChangePlatformBrightness();
   }
 }
