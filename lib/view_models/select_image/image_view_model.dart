@@ -14,7 +14,6 @@ import 'package:share/share.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
-  final GlobalKey genKey = GlobalKey();
   late File selectedImage;
   Color _backgroundColor = Colors.white;
   double _imageSize = 300.0;
@@ -83,8 +82,9 @@ class SelectImageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveimage() {
-    _convertImageToWidget();
+  void saveimage() async {
+    var image = await _convertImageToBytes();
+    _saveImage(image);
   }
 
   void shareimage() {
@@ -92,25 +92,22 @@ class SelectImageViewModel extends ChangeNotifier {
   }
 
   Future<void> takePicture() async {
-    RenderRepaintBoundary boundary = _screenshotKey.currentContext!
-        .findRenderObject() as RenderRepaintBoundary;
-    ui.Image image = await boundary.toImage();
+    var byteimage = await _convertImageToBytes();
+
     final directory = (await getApplicationDocumentsDirectory()).path;
-    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData!.buffer.asUint8List();
     File imgFile = File('$directory/photo.png');
-    await imgFile.writeAsBytes(pngBytes);
+    await imgFile.writeAsBytes(byteimage);
     await Share.shareFiles([imgFile.path]);
   }
 
-  void _convertImageToWidget() async {
+  Future<Uint8List> _convertImageToBytes() async {
     RenderRepaintBoundary boundaryImage = _screenshotKey.currentContext!
         .findRenderObject() as RenderRepaintBoundary;
     ui.Image boxImage = await boundaryImage.toImage(pixelRatio: 3);
     ByteData? byteData =
         await boxImage.toByteData(format: ui.ImageByteFormat.png);
     Uint8List byteImage = byteData!.buffer.asUint8List();
-    _saveImage(byteImage);
+    return byteImage;
   }
 
   void _saveImage(Uint8List byteImage) async {
