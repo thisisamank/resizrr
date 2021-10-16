@@ -10,6 +10,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share/share.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SelectImageViewModel extends ChangeNotifier {
   late File selectedImage;
@@ -80,18 +82,34 @@ class SelectImageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveimage() {
-    _convertImageToWidget();
+  void saveimage() async {
+    var image = await _convertImageToBytes();
+    _saveImage(image);
   }
 
-  void _convertImageToWidget() async {
+  void shareimage() async {
+    final imgFile = await _takePicture();
+    await Share.shareFiles([imgFile.path]);
+    await imgFile.delete();
+  }
+
+  Future<File> _takePicture() async {
+    var byteimage = await _convertImageToBytes();
+
+    final directory = (await getApplicationDocumentsDirectory()).path;
+    File imgFile = File('$directory/photo.png');
+    await imgFile.writeAsBytes(byteimage);
+    return imgFile;
+  }
+
+  Future<Uint8List> _convertImageToBytes() async {
     RenderRepaintBoundary boundaryImage = _screenshotKey.currentContext!
         .findRenderObject() as RenderRepaintBoundary;
     ui.Image boxImage = await boundaryImage.toImage(pixelRatio: 3);
     ByteData? byteData =
         await boxImage.toByteData(format: ui.ImageByteFormat.png);
     Uint8List byteImage = byteData!.buffer.asUint8List();
-    _saveImage(byteImage);
+    return byteImage;
   }
 
   void _saveImage(Uint8List byteImage) async {
