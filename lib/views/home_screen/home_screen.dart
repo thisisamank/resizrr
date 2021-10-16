@@ -27,10 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
     const FilterMenu(),
     const BackgroundMenu(),
   ];
-  @override
-  Widget build(BuildContext context) {
-    final imageViewModel = Provider.of<SelectImageViewModel>(context);
-    final snackBar = SnackBar(
+
+  SnackBar getSnackbar(String message) {
+    return SnackBar(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       behavior: SnackBarBehavior.floating,
@@ -49,20 +48,22 @@ class _HomeScreenState extends State<HomeScreen> {
             color: BrandColors.green,
           ),
           const SizedBox(width: 20),
-          const Expanded(
-            child: Text(
-              'Image saved 😎',
-            ),
+          Expanded(
+            child: Text(message),
           ),
         ],
       ),
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    final imageViewModel = Provider.of<SelectImageViewModel>(context);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         onTap: _changeMenu,
         currentIndex: imageMenuIndex,
-        selectedItemColor: BrandColors.black,
+        // selectedItemColor: BrandColors.black,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(
@@ -91,14 +92,27 @@ class _HomeScreenState extends State<HomeScreen> {
         iconTheme: const IconThemeData(
           color: BrandColors.black,
         ),
+        //backgroundColor: Colors.white,
+        // iconTheme: const IconThemeData(
+        //   color: BrandColors.black,
+        // ),
         actions: [
           IconButton(
               onPressed: () async {
                 await HapticFeedback.vibrate();
-                imageViewModel.saveimage();
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                imageViewModel.shareimage();
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(getSnackbar('Sharing image...'));
               },
-              icon: const Icon(Feather.download))
+              icon: const Icon(Icons.share)),
+          IconButton(
+              onPressed: () async {
+                await HapticFeedback.vibrate();
+                imageViewModel.saveimage();
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(getSnackbar('Image saved 😎'));
+              },
+              icon: const Icon(Feather.download)),
         ],
         elevation: 0,
       ),
