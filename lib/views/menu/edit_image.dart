@@ -5,6 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:resizrr/constants/colors.dart';
+import 'package:resizrr/constants/theme.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
 class ImageEditingMenu extends StatefulWidget {
@@ -113,7 +114,11 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
             height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(60),
-              border: Border.all(color: BrandColors.black),
+              border: Border.all(
+                  color: MediaQuery.of(context).platformBrightness ==
+                          Brightness.dark
+                      ? BrandColors.lightGrey
+                      : BrandColors.lightGreen),
             ),
             child: IconButton(
               onPressed: onTap,
@@ -139,8 +144,8 @@ class _ImageEditingMenuState extends State<ImageEditingMenu> {
         children: [
           Text(sliderLabel),
           Slider(
-            activeColor: BrandColors.black,
-            inactiveColor: BrandColors.lightGrey,
+            // activeColor: BrandColors.black,
+            // inactiveColor: BrandColors.lightGrey,
             value: sliderValue,
             onChanged: onChangeSlider,
           ),

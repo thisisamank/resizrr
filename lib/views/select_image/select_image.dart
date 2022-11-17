@@ -43,20 +43,31 @@ class SelectImage extends StatelessWidget {
               ),
             ),
           ),
-          MaterialButton(
-            padding: EdgeInsets.symmetric(horizontal: 42.w, vertical: 19.h),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.h),
-            ),
-            onPressed: () async {
-              await selectImageViewModel.selectImage();
-              if (selectImageViewModel.image != null) {
-                await Navigator.pushNamed(context, RouteNames.homeScreen);
-              }
-            },
-            color: BrandColors.green,
-            child: const Text(
-              'Select your file!',
+          Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: BrandColors.green.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: const Offset(8, 8),
+              ),
+            ]),
+            child: MaterialButton(
+              padding: EdgeInsets.symmetric(horizontal: 42.w, vertical: 19.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.h),
+              ),
+              onPressed: () async {
+                await selectImageViewModel.selectImage();
+                if (selectImageViewModel.image != null) {
+                  await Navigator.pushNamed(context, RouteNames.homeScreen);
+                }
+              },
+              color: BrandColors.green,
+              child: const Text(
+                'Select your file!',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
           Padding(

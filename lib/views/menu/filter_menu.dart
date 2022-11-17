@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:resizrr/constants/colors.dart';
 import 'package:resizrr/constants/filters.dart';
 import 'package:resizrr/view_models/select_image/image_view_model.dart';
 
@@ -35,15 +36,45 @@ class FilterMenu extends StatelessWidget {
                           child: SizedBox(
                             width: 70,
                             height: 70,
-                            child: ColorFiltered(
-                              colorFilter: ColorFilter.matrix(
-                                MyFilters.filters[index],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(60),
-                                child: Image.file(
-                                  imageViewModel.selectedImage,
-                                  fit: BoxFit.fitWidth,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border(
+                                    bottom: BorderSide(
+                                        color: MediaQuery.of(context)
+                                                    .platformBrightness ==
+                                                Brightness.dark
+                                            ? BrandColors.lightGrey
+                                            : BrandColors.lightGreen),
+                                    top: BorderSide(
+                                        color: MediaQuery.of(context)
+                                                    .platformBrightness ==
+                                                Brightness.dark
+                                            ? BrandColors.lightGrey
+                                            : BrandColors.lightGreen),
+                                    left: BorderSide(
+                                        color: MediaQuery.of(context)
+                                                    .platformBrightness ==
+                                                Brightness.dark
+                                            ? BrandColors.lightGrey
+                                            : BrandColors.lightGreen),
+                                    right: BorderSide(
+                                        color: MediaQuery.of(context)
+                                                    .platformBrightness ==
+                                                Brightness.dark
+                                            ? BrandColors.lightGrey
+                                            : BrandColors.lightGreen),
+                                  )),
+                              child: ColorFiltered(
+                                colorFilter: ColorFilter.matrix(
+                                  MyFilters.filters[index],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.file(
+                                    imageViewModel.selectedImage,
+                                    fit: BoxFit.fitWidth,
+                                  ),
                                 ),
                               ),
                             ),
