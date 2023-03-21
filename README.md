@@ -29,9 +29,12 @@ Whenever we upload a photo on instagram, Whatsapp dp ,linkedin or on any website
 
 If you like this project, don't forget to give it a star ⭐ and fork this project.
 
-### 🎉Upcoming features
 
-- Dark mode
+### 🎉 features
+- Dark Mode
+- Image filters
+
+### 🎉Upcoming features
 
 - Collage feature
 
@@ -52,4 +55,3 @@ You can get started with flutter from these resources:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
